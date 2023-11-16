@@ -39,14 +39,58 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
+article p {
+    margin-top: 0;
+    margin-bottom: 0.4em;
 }
+
 
 .photographer_section article img {
     object-fit: cover;
     border-radius: 100px;
     height: 200px;
     width: 200px;
+}
+
+.photographer_section article h2 {
+    color: #D3573C;
+    font-size: 36px;
+}
+
+.tagline-style {
+    color: #000;
+    text-align: center;
+    font-family: DM Sans;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.country-style {
+    font-size: 1em;
+    color: #901C1C;
+    font-family: DM Sans;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.price-style {
+    color: #757575;
+    font-family: DM Sans;
+    font-size: 1em;
+}
+
+.photographer-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.photographer-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
