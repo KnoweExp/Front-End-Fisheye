@@ -24,6 +24,10 @@ h1 {
     margin-left: 100px;
 }
 
+a {
+    text-decoration:none;
+}
+
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -56,6 +60,15 @@ article p {
     color: #D3573C;
     font-size: 36px;
 }
+
+.photograph-header img {
+    object-fit: cover;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+}
+
+
 
 .tagline-style {
     color: #000;
