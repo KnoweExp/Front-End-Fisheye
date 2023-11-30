@@ -51,7 +51,6 @@ function photographerTemplate(data) {
         headerLink.tabIndex = 0; // Permettre la navigation au clavier
         infoDiv.tabIndex = 0; 
 
-        // ... le reste du code du template ...
 
 // Ajouter un écouteur d'événements pour le clic
 headerLink.addEventListener('click', (e) => {
