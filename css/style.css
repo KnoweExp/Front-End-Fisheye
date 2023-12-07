@@ -78,7 +78,7 @@ a {
     flex-direction: column;
 }
 
-button {
+/* button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -89,22 +89,11 @@ button {
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.vsc-controller {
-    display: none ;
-}
+} */
 
 article p {
     margin-top: 0;
     margin-bottom: 0.4em;
-}
-
-.media-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    justify-items: center;
 }
 
 .media-container img,video {

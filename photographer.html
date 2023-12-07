@@ -5,20 +5,23 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
     <title>Fisheye - photographe </title>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="logo" class="logo" />
+      </a>
     </header>
     <main id="main">
       <div class="photographer-section-item">
         
       </div>
-      <div class="media-container"></div>
+      <section class="gallery-section"></section>
       <aside class="encartPhotographe">
-        <h3>Nombres de like</h3>
-        <p>prix : </p>
+        <h3 class="number-like">Nombres de like</h3>
     </aside>
     </main>
     <div id="contact_modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
@@ -48,6 +51,16 @@
 				</form>
 			</div>
 		</div>
+    <div id="lightbox" class="lightbox">
+      <span class="close">&times;</span>
+      <a class="prev">&#10094;</a>
+      <a class="next">&#10095;</a>
+      <div class="lightbox-content">
+          <!-- Les médias (images/vidéos) seront insérés ici dynamiquement -->
+      </div>
+  </div>
+  
+
     
     <script src="scripts/utils/contactForm.js"></script>
     <script type="module" src="/scripts/pages/photographer.js"></script>
