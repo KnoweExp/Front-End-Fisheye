@@ -19,10 +19,20 @@
       <div class="photographer-section-item">
         
       </div>
-      <section class="gallery-section"></section>
-      <aside class="encartPhotographe">
+      <aside tabindex="0" class="encartPhotographe">
         <h3 class="number-like">Nombres de like</h3>
     </aside>
+      
+      <div class="sort">
+        <span tabindex="0">trier par</span>
+        <select tabindex="0" id="sortOptions" class="trie">
+          <option value="popularity">Par popularité</option>
+          <option value="date">Par date</option>
+          <option value="title">Par titre</option>
+        </select>
+      </div>
+      
+      <section class="gallery-section"></section>
     </main>
     <div id="contact_modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
 			<div class="modal">

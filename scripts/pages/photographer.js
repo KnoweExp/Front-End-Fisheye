@@ -1,10 +1,9 @@
 import { MediaFactory } from '../templates/mediaFactory.js';
 import { buildMediaPath } from '../utils/utils.js';
-let mediaArray = [];
+
 let currentPhotographerName = '';
 let currentMediaIndex = 0;
-let globalPhotographerMedia = [];
-
+let photographerMedia = [];
 
 //Mettre le code JavaScript lié à la page photographer.html
 // Fonction pour afficher les détails du photographe dans le DOM
@@ -14,8 +13,9 @@ async function loadAndDisplayPhotographerData(photographerId) {
         const data = await response.json();
 
         const photographerData = data.photographers.find(p => p.id === parseInt(photographerId, 10));
-        const photographerMedia = data.media.filter(m => m.photographerId === parseInt(photographerId, 10));
-        globalPhotographerMedia = photographerMedia;
+
+        const filteredMedia = data.media.filter(m => m.photographerId === parseInt(photographerId, 10));
+        filteredMedia.forEach(mediaItem => photographerMedia.push(mediaItem));
 
         if (photographerData) {
             currentPhotographerName = photographerData.name;
@@ -30,18 +30,18 @@ async function loadAndDisplayPhotographerData(photographerId) {
 }
 
 function setupLightbox() {
-    document.querySelectorAll('.media-item').forEach((item, index) => {
+    document.querySelectorAll('.media-item').forEach((item) => {
         item.addEventListener('click', () => {
             const mediaId = item.dataset.mediaId;
-            openLightbox(mediaId);
+            openLightbox(mediaId, photographerMedia);
         });
     });
 }
 
-function openLightbox(mediaId) {
+function openLightbox(mediaId, photographerMedia) {
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.querySelector('.lightbox-content');
-    const media = mediaArray.find(m => m.id.toString() === mediaId);
+    const media = photographerMedia.find(m => m.id.toString() === mediaId);
 
     if (media) {
         const mediaPath = buildMediaPath(currentPhotographerName, media);
@@ -65,27 +65,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.querySelector('.next');
 
     if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-    if (prevBtn) prevBtn.addEventListener('click', () => changeMedia(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => changeMedia(1));
+    if (prevBtn) prevBtn.addEventListener('click', () => changeMedia(-1, photographerMedia));
+    if (nextBtn) nextBtn.addEventListener('click', () => changeMedia(1, photographerMedia));
+    document.addEventListener('keydown', handleKeyPress);
 });
 
-function changeMedia(step) {
+// Fonction pour gérer les pressions de touches
+function handleKeyPress(event) {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox.style.display === 'block') { // Vérifier si la lightbox est ouverte
+        if (event.key === 'ArrowLeft') {
+            changeMedia(-1, photographerMedia); // Flèche gauche pour le média précédent
+        } else if (event.key === 'ArrowRight') {
+            changeMedia(1, photographerMedia); // Flèche droite pour le média suivant
+        } else if (event.key === 'Escape') {
+            closeLightbox(); // Touche Échap pour fermer la lightbox
+        }
+    }
+}
+
+function changeMedia(step, photographerMedia) {
     currentMediaIndex += step;
 
-    if (currentMediaIndex >= mediaArray.length) {
+    if (currentMediaIndex >= photographerMedia.length) {
         currentMediaIndex = 0;
     } else if (currentMediaIndex < 0) {
-        currentMediaIndex = mediaArray.length - 1;
+        currentMediaIndex = photographerMedia.length - 1;
     }
 
-    const newMediaId = mediaArray[currentMediaIndex].id;
-    openLightbox(newMediaId.toString());
+    const newMediaId = photographerMedia[currentMediaIndex].id;
+    openLightbox(newMediaId.toString(), photographerMedia);
 }
 
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
-    lightbox.style.display = 'none';
+    if (lightbox.style.display === 'block') {
+        lightbox.style.display = 'none';
+    }
 }
+
+// Ajout d'un gestionnaire d'événements pour fermer la lightbox avec la touche Échap
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        closeLightbox();
+    }
+});
 
 window.onload = () => {
     setTimeout(setupLightbox, 1000); // Retarder pour tester
@@ -140,19 +164,21 @@ window.onload = () => {
     // Créer et ajouter l'image
     const img = document.createElement('img');
     img.className = 'photographer-section__picture';
+    img.tabIndex = 0;
     img.src = `assets/images/Photographers/${photographerData.id}.jpg`;
     img.alt = photographerData.name;
 
 
     // Ajouter les éléments à la div parente
     headerDiv.appendChild(profileDiv);
-    headerDiv.appendChild(img);
     headerDiv.appendChild(contactButton);
+    headerDiv.appendChild(img);
     
     //encart photographe prix
     // Sélectionner l'élément 'aside' avec la classe 'encartPhotographe'
     const encartPhotographe = document.querySelector('.encartPhotographe');
     const encartNumberLike = document.querySelector('.number-like');
+
     if (encartNumberLike) {
         encartNumberLike.textContent = totalLikes + ' likes';
     }
@@ -167,12 +193,12 @@ window.onload = () => {
 function displayPhotographerMedia(photographerMedia, photographerFullName){
     const mediaContainer = document.querySelector('.gallery-section');
 
-    
+    mediaContainer.innerHTML = '';
+
     photographerMedia.forEach(mediaItem => {
+
         mediaItem.isLiked = false;
-        
-        mediaArray.push(mediaItem); // Stocker les données des médias dans le tableau global
-        const mediaObject = MediaFactory(mediaItem, photographerFullName);
+        const mediaObject = MediaFactory(mediaItem, photographerFullName, photographerMedia);
         const mediaElement = mediaObject.getHTML();
         mediaContainer.appendChild(mediaElement);
 
@@ -182,8 +208,8 @@ function displayPhotographerMedia(photographerMedia, photographerFullName){
 }
 
 export function toggleLike(mediaId, likesCountElement, photographerMedia) {
-    console.log('PhotographerMedia in toggleLike:', photographerMedia);
-    const media = mediaArray.find(m => m.id === mediaId);
+    
+    const media = photographerMedia.find(m => m.id === mediaId);
     if (media) {
         media.isLiked = !media.isLiked;
         if (media.isLiked) {
@@ -194,14 +220,18 @@ export function toggleLike(mediaId, likesCountElement, photographerMedia) {
         likesCountElement.textContent = media.likes;
         updateLikeDisplay(mediaId, media.isLiked);
         console.log(media.isLiked)
-        updateTotalLikes(photographerMedia); // Mettez à jour le total des likes dans l'encart
-        
+        updateTotalLikes(photographerMedia);
     }
 }
 
-function updateTotalLikes() {
+function updateTotalLikes(photographerMedia) {
+    if (!photographerMedia || !Array.isArray(photographerMedia)){
+            return;
+    }
+
+    
     let totalLikes = 0;
-    globalPhotographerMedia.forEach(media => {
+    photographerMedia.forEach(media => {
         totalLikes += media.likes;
     });
     const encartNumberLike = document.querySelector('.number-like');
@@ -216,6 +246,29 @@ function updateLikeDisplay(mediaId, isLiked) {
         likeIcon.className = isLiked ? "fas fa-heart" : "far fa-heart"; // Changez la classe de l'icône
     }
 }
+
+document.getElementById('sortOptions').addEventListener('change', function() {
+    const selectedOption = this.value;
+    sortMedia(selectedOption);
+});
+
+function sortMedia(sortBy) {
+    switch (sortBy) {
+        case 'popularity':
+            photographerMedia.sort((a, b) => b.likes - a.likes);
+            console.log("Trié par popularité:", photographerMedia);
+            break;
+        case 'date':
+            photographerMedia.sort((a, b) => new Date(b.date) - new Date(a.date));
+            break;
+        case 'title':
+            photographerMedia.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+    }
+
+    displayPhotographerMedia(photographerMedia, currentPhotographerName);
+}
+
 
 
 // Code pour récupérer l'ID du photographe de l'URL et afficher les détails

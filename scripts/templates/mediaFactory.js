@@ -2,11 +2,12 @@ import { buildMediaPath } from '../utils/utils.js';
 import { toggleLike } from '../pages/photographer.js'
 
 class ImageMedia {
-    constructor(mediaData, photographerFullName) {
+    constructor(mediaData, photographerFullName, photographerMedia) {
         this.src = buildMediaPath(photographerFullName, mediaData);
         this.title = mediaData.title;
         this.id = mediaData.id;
         this.likes = mediaData.likes;
+        this.photographerMedia = photographerMedia;
         // L'ID est pris du JSON
         // ... autres propriétés ...
     }
@@ -16,6 +17,7 @@ class ImageMedia {
         article.className = "media-container";
 
         const imgElement = document.createElement('img');
+        imgElement.tabIndex = 0;
         imgElement.src = this.src;
         imgElement.alt = this.title;
         imgElement.className = "media-item";
@@ -27,17 +29,19 @@ class ImageMedia {
 
         const title = document.createElement('p');
         title.textContent = this.title;
+        title.tabIndex = 0;
         mediaDetail.appendChild(title);
 
         const likesCount = document.createElement('span');
         likesCount.textContent = this.likes;
         likesCount.className = "likes-count";
+        likesCount.tabIndex= 0;
         mediaDetail.appendChild(likesCount);
 
-        const likeButton = document.createElement('button');
-        likeButton.className = "like-button";
+        const likeButton = document.createElement('div');
+        likeButton.id = `like-button-${this.id}`;
         likeButton.innerHTML = '<i class="far fa-heart"></i>';
-        likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, photographerMedia));
+        likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, this.photographerMedia));
         mediaDetail.appendChild(likeButton);
 
         article.appendChild(mediaDetail);
@@ -47,18 +51,23 @@ class ImageMedia {
 }
 
 class VideoMedia {
-    constructor(mediaData, photographerFullName) {
+    constructor(mediaData, photographerFullName, photographerMedia) {
         this.src = buildMediaPath(photographerFullName, mediaData);
         this.title = mediaData.title;
         this.id = mediaData.id; // L'ID est pris du JSON
+        this.likes = mediaData.likes;
+        this.photographerMedia = photographerMedia;
         // ... autres propriétés ...
     }
     
     getHTML(photographerMedia) {
+        console.log("Likes for video", this.id, ":", this.likes);
+
         const article = document.createElement('article');
         article.className = "media-container";
 
         const videoElement = document.createElement('video');
+        videoElement.tabIndex = 0;
         videoElement.controls = true;
         videoElement.src = this.src;
         videoElement.title = this.title;
@@ -77,17 +86,19 @@ class VideoMedia {
 
         const title = document.createElement('p');
         title.textContent = this.title;
+        title.tabIndex = 0;
         mediaDetail.appendChild(title);
 
         const likesCount = document.createElement('span');
         likesCount.textContent = this.likes;
+        likesCount.tabIndex= 0;
         likesCount.className = "likes-count";
         mediaDetail.appendChild(likesCount);
 
-        const likeButton = document.createElement('button');
-        likeButton.className = "like-button";
+        const likeButton = document.createElement('div');
+        likeButton.id = `like-button-${this.id}`;
         likeButton.innerHTML = '<i class="far fa-heart"></i>';
-        likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, photographerMedia));
+        likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, this.photographerMedia));
         mediaDetail.appendChild(likeButton);
 
         article.appendChild(mediaDetail);
@@ -100,11 +111,11 @@ class VideoMedia {
     }
 }
 
-function MediaFactory(mediaData, photographerName) {
+function MediaFactory(mediaData, photographerName, photographerMedia) {
     if ('image' in mediaData) {
-        return new ImageMedia(mediaData, photographerName);
+        return new ImageMedia(mediaData, photographerName, photographerMedia);
     } else if ('video' in mediaData) {
-        return new VideoMedia(mediaData, photographerName);
+        return new VideoMedia(mediaData, photographerName, photographerMedia);
     } else {
         throw new Error('Type de média inconnu');
     }
