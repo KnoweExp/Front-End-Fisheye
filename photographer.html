@@ -1,80 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <a href="index.html">
-        <img src="assets/images/logo.png" alt="logo" class="logo" />
-      </a>
-    </header>
-    <main id="main">
-      <div class="photographer-section-item">
-        
-      </div>
-      <aside tabindex="0" class="encartPhotographe">
-        <h3 class="number-like">Nombres de like</h3>
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
+      <img src="assets/images/logo.png" alt="logo" class="logo" />
+    </a>
+  </header>
+  <main id="main">
+    <div class="photographer-section-item">
+
+    </div>
+    <aside tabindex="0" class="encartPhotographe">
+      <h3 class="number-like">Nombres de like</h3>
     </aside>
-      
-      <div class="sort">
-        <span tabindex="0">trier par</span>
-        <select tabindex="0" id="sortOptions" class="trie">
-          <option value="popularity">Par popularité</option>
-          <option value="date">Par date</option>
-          <option value="title">Par titre</option>
-        </select>
-      </div>
-      
-      <section class="gallery-section"></section>
-    </main>
-    <div id="contact_modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-			<div class="modal">
-				<header>
-          <h2 id="modalTitle">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div class="formData">
-						<label for="first">Prénom</label>
-						<input class="text-control" type="text" id="first" name="first"/>
-					</div>
-          <div class="formData">
-						<label for="last">Nom</label>
-						<input class="text-control" type="text" id="last" name="last"/>
-					</div>
-          <div class="formData">
-						<label for="email">E-mail</label>
-						<input class="text-control" type="email" id="email" name="email" />
-					</div>
-          <div class="formData">
-						<label>Votre message</label>
-            <textarea id="message" name="message" placeholder="Votre message"></textarea>
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <div id="lightbox" class="lightbox">
-      <span class="close">&times;</span>
-      <a class="prev">&#10094;</a>
-      <a class="next">&#10095;</a>
-      <div class="lightbox-content">
-          <!-- Les médias (images/vidéos) seront insérés ici dynamiquement -->
-      </div>
+
+    <span class="sort custom-dropdown custom-dropdown--white">
+      <span tabindex="0">trier par</span>
+      <select tabindex="0" id="sortOptions" class="trie custom-dropdown__select custom-dropdown__select--white">
+        <option value="popularity">Par popularité</option>
+        <option value="date">Par date</option>
+        <option value="title">Par titre</option>
+      </select>
+    </span>
+
+    <section class="gallery-section"></section>
+  </main>
+  <div id="contact_modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal">
+      <header>
+        <h2 id="modalTitle" aria-labelledby="title">Contactez-moi</h2>
+        <img src="assets/icons/close.svg" id="closeModalButton" />
+      </header>
+      <form>
+        <div class="formData">
+          <label for="first">Prénom</label>
+          <input class="text-control" type="text" id="first" name="first" />
+        </div>
+        <div class="formData">
+          <label for="last">Nom</label>
+          <input class="text-control" type="text" id="last" name="last" />
+        </div>
+        <div class="formData">
+          <label for="email">E-mail</label>
+          <input class="text-control" type="email" id="email" name="email" />
+        </div>
+        <div class="formData">
+          <label>Votre message</label>
+          <textarea id="message" name="message" placeholder="Votre message"></textarea>
+        </div>
+        <button class="contact_button">Envoyer</button>
+      </form>
+    </div>
   </div>
-  
+  <!-- <div id="lightbox" tabindex="0" class="lightbox">
+    <a class="prev" tabindex="0">&#10094;</a>
+    <a class="next" tabindex="0">&#10095;</a>
+    <span class="close" tabindex="0">&times;</span>
+    <div class="lightbox-content">
+       Les médias (images/vidéos) seront insérés ici dynamiquement -->
+  <!-- </div>
+  </div> -->
 
-    
-    <script src="scripts/utils/contactForm.js"></script>
-    <script type="module" src="/scripts/pages/photographer.js"></script>
-    <script type="module" src="/scripts/templates/mediaFactory.js"></script>
 
-  </body>
+
+  <script type="module" src="scripts/utils/contactForm.js"></script>
+  <script type="module" src="/scripts/pages/photographer.js"></script>
+  <script type="module" src="/scripts/templates/mediaFactory.js"></script>
+
+</body>
+
 </html>

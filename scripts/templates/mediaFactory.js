@@ -2,20 +2,22 @@ import { buildMediaPath } from '../utils/utils.js';
 import { toggleLike } from '../pages/photographer.js'
 
 class ImageMedia {
-    constructor(mediaData, photographerFullName, photographerMedia) {
-        this.src = buildMediaPath(photographerFullName, mediaData);
+    constructor(mediaData, currentPhotographerName, photographerMedia) {
+
+        this.src = buildMediaPath(currentPhotographerName, mediaData);
+        console.log("mediadata dans mediafactory : ", mediaData)
         this.title = mediaData.title;
         this.id = mediaData.id;
         this.likes = mediaData.likes;
         this.photographerMedia = photographerMedia;
+        this.type = 'image';
         // L'ID est pris du JSON
         // ... autres propriétés ...
     }
-    
-    getHTML(photographerMedia) {
+
+    getHTML() {
         const article = document.createElement('article');
         article.className = "media-container";
-
         const imgElement = document.createElement('img');
         imgElement.tabIndex = 0;
         imgElement.src = this.src;
@@ -35,7 +37,7 @@ class ImageMedia {
         const likesCount = document.createElement('span');
         likesCount.textContent = this.likes;
         likesCount.className = "likes-count";
-        likesCount.tabIndex= 0;
+        likesCount.tabIndex = 0;
         mediaDetail.appendChild(likesCount);
 
         const likeButton = document.createElement('div');
@@ -48,20 +50,24 @@ class ImageMedia {
 
         return article;
     }
+
+    getLightboxHTML() {
+        return `<img class="lightbox-content" src="${this.src}" alt="${this.title}">`;
+    }
 }
 
 class VideoMedia {
-    constructor(mediaData, photographerFullName, photographerMedia) {
-        this.src = buildMediaPath(photographerFullName, mediaData);
+    constructor(mediaData, currentPhotographerName, photographerMedia) {
+        this.src = buildMediaPath(currentPhotographerName, mediaData);
         this.title = mediaData.title;
         this.id = mediaData.id; // L'ID est pris du JSON
         this.likes = mediaData.likes;
         this.photographerMedia = photographerMedia;
+        this.type = 'video';
         // ... autres propriétés ...
     }
-    
-    getHTML(photographerMedia) {
-        console.log("Likes for video", this.id, ":", this.likes);
+
+    getHTML() {
 
         const article = document.createElement('article');
         article.className = "media-container";
@@ -91,7 +97,7 @@ class VideoMedia {
 
         const likesCount = document.createElement('span');
         likesCount.textContent = this.likes;
-        likesCount.tabIndex= 0;
+        likesCount.tabIndex = 0;
         likesCount.className = "likes-count";
         mediaDetail.appendChild(likesCount);
 
@@ -109,16 +115,28 @@ class VideoMedia {
         // ... autres attributs et styles ...
         return article;
     }
+
+    getLightboxHTML() {
+        return `<video controls>
+                    <source src="${this.src}" type="video/mp4">
+                    Votre navigateur ne supporte pas l'élément vidéo.
+                </video>`;
+    }
 }
 
 function MediaFactory(mediaData, photographerName, photographerMedia) {
-    if ('image' in mediaData) {
+    console.log("Dans MediaFactory - PhotographerName :", photographerName);
+
+    if (mediaData.image) {
         return new ImageMedia(mediaData, photographerName, photographerMedia);
-    } else if ('video' in mediaData) {
+    } else if (mediaData.video) {
         return new VideoMedia(mediaData, photographerName, photographerMedia);
+
+
     } else {
         throw new Error('Type de média inconnu');
     }
 }
+
 
 export { MediaFactory };

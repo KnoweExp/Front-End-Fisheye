@@ -1,192 +1,293 @@
 #contact_modal {
-    display: none;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .gallery-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  justify-items: center;
 }
 
 .sort {
-    margin: 2em 0 2em 5%;
+  margin: 2em 0 2em 5%;
 }
 
 .media-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .media-detail {
-    display: flex;
-    justify-content: space-between;
-    margin: 1em 0;
-    color: #901C1C;
-    font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0;
+  color: #901c1c;
+  font-size: 18px;
 }
 
 .trie {
-    background-color: #901C1C;
-    border: none;
-    border-radius: 4px;
-    padding: 0.3em;
-    margin: 1rem 0;
-    width: 8rem;
-    color: #fff;
-    cursor: pointer;
-
+  background-color: #901c1c;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3em;
+  margin: 1rem 0;
+  width: 10rem;
+  color: #fff;
+  cursor: pointer;
 }
 
 .modal {
-    position: relative;
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+  position: relative;
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+  font-size: 64px;
+  font-weight: normal;
+  text-align: center;
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  color: #312e2e;
+  font-size: 36px;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
 }
 
 /* LIGHTBOX  */
 
 .lightbox {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.9);
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: white;
 }
 
 .lightbox-content {
-    margin: auto;
-    display: flex;
-    width: 80%;
-    max-width: 700px;
-    align-items: center;
+  margin: auto;
+  display: flex;
+  width: 80%;
+  max-width: 700px;
+  align-items: center;
+  object-fit: contain;
+  flex-direction: column;
 }
 
 .close {
-    position: absolute;
-    top: 25px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  color: #ff0000;
+  font-size: 60px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -50px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    transition: 0.6s ease;
-    user-select: none;
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  font-size: 50px;
+  transition: 0.6s ease;
+  user-select: none;
 }
 
-.lightbox-content ,img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    object-fit: contain;
-    max-width: 90vw;
-    max-height: 90vh;
+.lightbox-content,
+img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+  max-width: 90vw;
+  max-height: 75vh;
 }
 
 .prev {
-    left: 0;
+  left: 0;
 }
 
 .next {
-    right: 0;
+  right: 0;
 }
 
 .media-item {
-    position: relative;
-    /* autres styles pour l'élément média */
+  position: relative;
+  /* autres styles pour l'élément média */
 }
 
 .like-button {
-    display: block; /* Cela place le bouton sur sa propre ligne en dessous de l'élément média */
-    /* autres styles pour le bouton */
+  display: block; /* Cela place le bouton sur sa propre ligne en dessous de l'élément média */
+  /* autres styles pour le bouton */
+}
+
+/* BOUTON DE TRIE */
+
+.custom-dropdown--large {
+  font-size: 1.5em;
+}
+
+.custom-dropdown--small {
+  font-size: 0.7em;
+}
+
+.custom-dropdown__select {
+  font-size: inherit; /* inherit size from .custom-dropdown */
+  padding: 0.5em; /* add some space*/
+  margin: 0; /* remove default margins */
+}
+
+.custom-dropdown__select--white {
+  background-color: #901c1c;
+  color: #ffffff;
+}
+
+@supports (pointer-events: none) and
+  ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .custom-dropdown__select {
+    padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */
+    border: 0;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .custom-dropdown::before,
+  .custom-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .custom-dropdown::after {
+    /*  Custom dropdown arrow */
+    content: "\25B2";
+    height: 1em;
+    font-size: 0.625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%;
+    margin-top: -0.5em;
+  }
+
+  .custom-dropdown::before {
+    /*  Custom dropdown arrow cover */
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .custom-dropdown__select[disabled] {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  .custom-dropdown.custom-dropdown--disabled::after {
+    color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* White dropdown style */
+  .custom-dropdown--white::before {
+    top: 0.5em;
+    bottom: 0.5em;
+    background-color: #901c1c;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .custom-dropdown--white::after {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* FF only temp fix */
+  @-moz-document url-prefix() {
+    .custom-dropdown__select {
+      padding-right: 0.9em;
+    }
+    .custom-dropdown--large .custom-dropdown__select {
+      padding-right: 1.3em;
+    }
+    .custom-dropdown--small .custom-dropdown__select {
+      padding-right: 0.5em;
+    }
+  }
 }
