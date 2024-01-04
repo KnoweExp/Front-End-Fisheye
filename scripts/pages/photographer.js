@@ -148,7 +148,11 @@ function createLightboxElements() {
     const lightbox = document.getElementById('lightbox') || document.createElement('div');
     lightbox.id = 'lightbox';
     lightbox.className = 'lightbox';
-    lightbox.tabIndex = 0;
+
+    // Créer le conteneur de contenu
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'lightbox-content';
+    contentDiv.tabIndex = 0;
 
     // Créer le bouton précédent
     const prevButton = document.createElement('a');
@@ -171,15 +175,12 @@ function createLightboxElements() {
     closeButton.innerHTML = '&times;';
     closeButton.addEventListener('click', closeLightbox);
 
-    // Créer le conteneur de contenu
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'lightbox-content';
 
     // Ajouter les éléments à la lightbox
+    lightbox.appendChild(contentDiv);
     lightbox.appendChild(prevButton);
     lightbox.appendChild(nextButton);
     lightbox.appendChild(closeButton);
-    lightbox.appendChild(contentDiv);
 
     // Ajouter la lightbox au body si elle n'y est pas déjà
     if (!document.getElementById('lightbox')) {
@@ -200,30 +201,11 @@ function openLightbox(media) {
     lightboxContent.innerHTML = media.getLightboxHTML();; // Nettoyer le contenu précédent
 
 
+
+
     const mediaObject = mediaManager.photographerMedia.find(m => m.id === media.id);
 
     if (mediaObject) {
-        let mediaElement;
-        /* if (mediaObject.type === 'image') {
-            mediaElement = document.createElement('img');
-            mediaElement.src = mediaObject.src;
-            mediaElement.alt = mediaObject.title;
-        } else if (mediaObject.type === 'video') {
-            mediaElement = document.createElement('video');
-            const sourceElement = document.createElement('source');
-            sourceElement.src = mediaObject.src;
-            sourceElement.type = 'video/mp4';
-            mediaElement.appendChild(sourceElement);
-            mediaElement.controls = true;
-        }
-
-        if (mediaElement) {
-            mediaElement.tabIndex = 0;
-            lightboxContent.appendChild(mediaElement);
-        } else {
-            console.error('Type de média non supporté ou non défini');
-            return;
-        } */
 
         // Créer et ajouter le titre
         const titleElement = document.createElement('p');
@@ -245,13 +227,15 @@ function openLightbox(media) {
 // Fonction pour gérer les pressions de touches
 function handleKeyPress(event) {
     const lightbox = document.getElementById('lightbox');
-    if (lightbox.style.display === 'block') { // Vérifier si la lightbox est ouverte
+
+    // Assurez-vous que l'élément lightbox existe avant de tenter d'accéder à ses propriétés
+    if (lightbox && lightbox.style.display === 'block') {
         if (event.key === 'ArrowLeft') {
-            changeMedia(-1, mediaManager.photographerMedia); // Flèche gauche pour le média précédent
+            // Votre logique pour flèche gauche
         } else if (event.key === 'ArrowRight') {
-            changeMedia(1, mediaManager.photographerMedia); // Flèche droite pour le média suivant
+            // Votre logique pour flèche droite
         } else if (event.key === 'Escape') {
-            closeLightbox(); // Touche Échap pour fermer la lightbox
+            closeLightbox();
         }
     }
 }
@@ -313,7 +297,7 @@ function displayPhotographerDetails(photographerData) {
     const profileDiv = document.createElement('div');
     profileDiv.className = 'photographer-section__profile';
 
-    const nameH2 = document.createElement('h2');
+    const nameH2 = document.createElement('h1');
     nameH2.className = 'photographer-section__profile-name';
     nameH2.tabIndex = 0;
     nameH2.textContent = photographerData.name;
@@ -344,7 +328,7 @@ function displayPhotographerDetails(photographerData) {
 
     // Ajout du nom de photographe a la modale contactez-moi
     const titreModal = document.getElementById('modalTitle');
-    titreModal.textContent = "Contactez-moi - " + photographerData.name;
+    titreModal.textContent = "Contactez-moi " + photographerData.name;
 
     // Créer et ajouter l'image
     const img = document.createElement('img');
@@ -393,9 +377,9 @@ function displayPhotographerMedia() {
     setupLightbox();
 }
 
-export function toggleLike(medias, likesCountElement) {
-    console.log("toggleLike called", medias, likesCountElement, mediaManager.photographerMedia);
-    const media = mediaManager.photographerMedia.find(m => m.id === medias);
+export function toggleLike(id, likesCountElement) {
+    console.log("toggleLike called", id, likesCountElement, mediaManager.photographerMedia);
+    const media = mediaManager.photographerMedia.find(m => m.id === id);
     if (media) {
         media.isLiked = !media.isLiked;
         if (media.isLiked) {
@@ -404,7 +388,7 @@ export function toggleLike(medias, likesCountElement) {
             media.likes--;
         }
         likesCountElement.textContent = media.likes;
-        updateLikeDisplay(medias, media.isLiked);
+        updateLikeDisplay(id, media.isLiked);
         console.log(media.isLiked)
         updateTotalLikes(mediaManager.photographerMedia);
     }

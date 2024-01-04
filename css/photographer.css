@@ -61,6 +61,11 @@
   cursor: pointer;
 }
 
+h1 {
+  color: #d3573c;
+  margin-right: 100px;
+}
+
 .modal {
   position: relative;
   border-radius: 5px;
@@ -83,9 +88,9 @@
 }
 
 .modal header h2 {
-  font-size: 64px;
+  font-size: 40px;
   font-weight: normal;
-  text-align: center;
+  padding-bottom: 1em;
 }
 
 form {
@@ -97,7 +102,7 @@ form {
 
 form label {
   color: #312e2e;
-  font-size: 36px;
+  font-size: 24px;
 }
 
 form div {
@@ -105,7 +110,7 @@ form div {
   flex-direction: column;
   width: 100%;
   align-items: self-start;
-  margin-bottom: 26px;
+  margin-bottom: 1em;
 }
 
 form input {
@@ -133,11 +138,15 @@ form input {
 .lightbox-content {
   margin: auto;
   display: flex;
-  width: 80%;
   max-width: 700px;
-  align-items: center;
+  align-items: start;
   object-fit: contain;
   flex-direction: column;
+}
+
+.lightbox-title {
+  color: #901c1c;
+  padding-left: 4em;
 }
 
 .close {
@@ -165,14 +174,16 @@ form input {
   user-select: none;
 }
 
-.lightbox-content,
-img {
+.lightbox-content.video-size {
   display: flex;
   justify-content: center;
-  align-items: center;
   object-fit: contain;
   max-width: 90vw;
   max-height: 75vh;
+}
+
+.lightbox-content video {
+  width: 100%;
 }
 
 .prev {
@@ -278,7 +289,7 @@ img {
     color: rgba(255, 255, 255, 0.9);
   }
 
-  /* FF only temp fix */
+  /* // FF only temp fix
   @-moz-document url-prefix() {
     .custom-dropdown__select {
       padding-right: 0.9em;
@@ -289,5 +300,5 @@ img {
     .custom-dropdown--small .custom-dropdown__select {
       padding-right: 0.5em;
     }
-  }
+  } */
 }

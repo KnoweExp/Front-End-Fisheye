@@ -1,38 +1,32 @@
 @import url("photographer.css");
 
 body {
-    font-family: "DM Sans", sans-serif;
-    margin: 0;
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
 }
-
 
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 90px;
-}
-
-h1 {
-    color: #901C1C;
-    margin-right: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
 }
 
 .logo {
-    height: 50px;
-    margin-left: 100px;
+  height: 50px;
+  margin-left: 100px;
 }
 
 a {
-    text-decoration:none;
+  text-decoration: none;
 }
 
 .photographer_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 70px;
+  margin-top: 100px;
 }
 
 /* .photographer_section article {
@@ -44,38 +38,38 @@ a {
 } */
 
 .photographer-section__profile-name {
-    font-size: 3em;
+  font-size: 3em;
 }
 
 .photographer-section__profile-name h2 {
-    color: #D3573C;
+  color: #d3573c;
 }
 
 .photographer-section__profile-details-location {
-    color: #901C1C;
-    margin-bottom: 1em;
-    font-size: 24px;
+  color: #901c1c;
+  margin-bottom: 1em;
+  font-size: 24px;
 }
 
 .photographer-section-item {
-    background-color: #FAFAFA;
-    margin: 0 5% 2em 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px;
+  background-color: #fafafa;
+  margin: 0 5% 2em 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
 }
 
 .photographer-section__picture {
-    border-radius: 50%;
-    object-fit: cover;
-    height: 200px;
-    width: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
 }
 
 .photographer-section__profile-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* button {
@@ -92,42 +86,43 @@ a {
 } */
 
 article p {
-    margin-top: 0;
-    margin-bottom: 0.4em;
+  margin-top: 0;
+  margin-bottom: 0.4em;
 }
 
-.media-container img,video {
-    width: 300px;
-    height: 300px;
-    object-fit:cover;
+.media-container img,
+.media-container video {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
 }
 
 /* A VOIR  */
 
 textarea {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border: 5px;
+  width: 100%;
+  height: 68px;
+  border: none;
+  border: 5px;
 }
 
 .photographer_section article img {
-    object-fit: cover;
-    border-radius: 100px;
-    height: 200px;
-    width: 200px;
+  object-fit: cover;
+  border-radius: 100px;
+  height: 200px;
+  width: 200px;
 }
 
 .photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
+  color: #d3573c;
+  font-size: 36px;
 }
 
 .photographer-section__picture {
-    border-radius: 50%;
-    object-fit: cover;
-    height: 200px;
-    width: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
 }
 
 /* .photographer-header img {
@@ -138,54 +133,54 @@ textarea {
 } */
 
 .encartPhotographe {
-    position: fixed;
-    bottom: 0px;
-    left: 85%;
-    background-color: #D3573C;
-    width: 225px;
-    height: 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 5px 5px 0 0;
-    font-weight: 500;
-    z-index: 1;
+  position: fixed;
+  bottom: 0px;
+  left: 85%;
+  background-color: #d3573c;
+  width: 225px;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px 5px 0 0;
+  font-weight: 500;
+  z-index: 1;
 }
 
 .tagline-style {
-    color: #000;
-    text-align: center;
-    font-family: DM Sans;
-    font-size: 1em;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .country-style {
-    font-size: 1em;
-    color: #901C1C;
-    font-family: DM Sans;
-    font-weight: 400;
-    line-height: normal;
+  font-size: 1em;
+  color: #901c1c;
+  font-family: DM Sans;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .price-style {
-    color: #757575;
-    font-family: DM Sans;
-    font-size: 1em;
+  color: #757575;
+  font-family: DM Sans;
+  font-size: 1em;
 }
 
 .photographer-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .photographer-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

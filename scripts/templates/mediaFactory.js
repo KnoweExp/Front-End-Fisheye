@@ -52,7 +52,7 @@ class ImageMedia {
     }
 
     getLightboxHTML() {
-        return `<img class="lightbox-content" src="${this.src}" alt="${this.title}">`;
+        return `<img class="lightbox-content" tabindex="0" src="${this.src}" alt="${this.title}">`;
     }
 }
 
@@ -118,7 +118,7 @@ class VideoMedia {
 
     getLightboxHTML() {
         return `<video controls>
-                    <source src="${this.src}" type="video/mp4">
+                    <source src="${this.src}" class="video-size" type="video/mp4">
                     Votre navigateur ne supporte pas l'élément vidéo.
                 </video>`;
     }
