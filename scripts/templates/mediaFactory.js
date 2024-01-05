@@ -11,8 +11,6 @@ class ImageMedia {
         this.likes = mediaData.likes;
         this.photographerMedia = photographerMedia;
         this.type = 'image';
-        // L'ID est pris du JSON
-        // ... autres propriétés ...
     }
 
     getHTML() {
@@ -64,7 +62,6 @@ class VideoMedia {
         this.likes = mediaData.likes;
         this.photographerMedia = photographerMedia;
         this.type = 'video';
-        // ... autres propriétés ...
     }
 
     getHTML() {
@@ -109,10 +106,9 @@ class VideoMedia {
 
         article.appendChild(mediaDetail);
 
-        // Ajouter un contenu de fallback
         videoElement.innerHTML = "Votre navigateur ne supporte pas l'élément vidéo.";
 
-        // ... autres attributs et styles ...
+
         return article;
     }
 

@@ -115,8 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ajout de gestionnaires d'événements pour les boutons
     if (closeBtnContact) closeBtnContact.addEventListener('click', closeModal);
     if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-    if (prevBtn) prevBtn.addEventListener('click', () => changeMedia(-1, photographerMedia));
-    if (nextBtn) nextBtn.addEventListener('click', () => changeMedia(1, photographerMedia));
+    if (prevBtn) prevBtn.addEventListener('click', () => changeMedia(-1, mediaManager.photographerMedia));
+    if (nextBtn) nextBtn.addEventListener('click', () => changeMedia(1, mediaManager.photographerMedia));
 
 
     // Ajout d'un gestionnaire d'événement pour les pressions de touches
@@ -128,7 +128,7 @@ function setupLightbox() {
     // Parcours de chaque média et ajout de gestionnaires d'événements
     mediaManager.photographerMedia.forEach((mediaItem) => {
         const item = document.querySelector(`[data-media-id="${mediaItem.id}"]`);
-
+        createLightboxElements(); 
         // Gestionnaire de clic pour ouvrir la lightbox
         item.addEventListener('click', () => {
             openLightbox(mediaItem, currentPhotographerName);
@@ -144,17 +144,19 @@ function setupLightbox() {
     });
 }
 
+// Cette fonction crée les éléments de la lightbox une seule fois et les ajoute au DOM si nécessaire.
 function createLightboxElements() {
+    // Récupère la lightbox existante ou en crée une nouvelle si elle n'existe pas.
     const lightbox = document.getElementById('lightbox') || document.createElement('div');
     lightbox.id = 'lightbox';
     lightbox.className = 'lightbox';
 
-    // Créer le conteneur de contenu
+    // Création du conteneur principal pour le contenu de la lightbox.
     const contentDiv = document.createElement('div');
     contentDiv.className = 'lightbox-content';
     contentDiv.tabIndex = 0;
 
-    // Créer le bouton précédent
+    // Boutons pour naviguer entre les médias (précédent).
     const prevButton = document.createElement('a');
     prevButton.className = 'prev';
     prevButton.tabIndex = 0;
@@ -168,7 +170,7 @@ function createLightboxElements() {
     nextButton.innerHTML = '&#10095;';
     nextButton.addEventListener('click', () => changeMedia(1));
 
-    // Créer le bouton de fermeture
+    // Créer le bouton de fermeture de la lightbox.
     const closeButton = document.createElement('span');
     closeButton.className = 'close';
     closeButton.tabIndex = 0;
@@ -188,17 +190,14 @@ function createLightboxElements() {
     }
 }
 
-
+// Ouvre la lightbox et affiche le contenu média sélectionné.
 function openLightbox(media) {
     openLightboxCallCount++;
     console.log("openLightbox a été appelé", openLightboxCallCount, "fois");
-    console.log("media dans openLightbox:", media);
-    // Assurez-vous que les éléments de la lightbox sont créés
-    createLightboxElements();
 
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.querySelector('.lightbox-content');
-    lightboxContent.innerHTML = media.getLightboxHTML();; // Nettoyer le contenu précédent
+    lightboxContent.innerHTML = media.getLightboxHTML(); // Nettoyer le contenu précédent
 
 
 
@@ -207,16 +206,16 @@ function openLightbox(media) {
 
     if (mediaObject) {
 
-        // Créer et ajouter le titre
+        // Crée et ajoute un titre pour le média dans la lightbox.
         const titleElement = document.createElement('p');
         titleElement.textContent = mediaObject.title;
         titleElement.className = 'lightbox-title';
         titleElement.tabIndex = 0;
         lightboxContent.appendChild(titleElement);
 
-        lightbox.style.display = 'block';
-        lightbox.setAttribute('tabindex', '0');
-        lightbox.focus();
+        lightbox.style.display = 'block'; // Affiche la lightbox.
+        lightbox.setAttribute('tabindex', '0'); // Permet le focus sur la lightbox.
+        lightbox.focus(); // Met le focus sur la lightbox.
     } else {
         console.error('Média non trouvé pour l\'ID:', media);
     }
@@ -224,48 +223,50 @@ function openLightbox(media) {
 
 
 
-// Fonction pour gérer les pressions de touches
+// Gère les pressions de touches pour naviguer dans la lightbox ou la fermer.
 function handleKeyPress(event) {
     const lightbox = document.getElementById('lightbox');
 
-    // Assurez-vous que l'élément lightbox existe avant de tenter d'accéder à ses propriétés
+    // Vérifie si la lightbox est ouverte avant de réagir aux touches.
     if (lightbox && lightbox.style.display === 'block') {
         if (event.key === 'ArrowLeft') {
-            // Votre logique pour flèche gauche
+            changeMedia(-1); // Média précédent.
         } else if (event.key === 'ArrowRight') {
-            // Votre logique pour flèche droite
+            changeMedia(1); // Média suivant.
         } else if (event.key === 'Escape') {
-            closeLightbox();
+            closeLightbox(); // Ferme la lightbox.
         }
     }
 }
 
+// Change le média affiché dans la lightbox en fonction du pas donné.
 function changeMedia(step) {
-    // Assurez-vous que currentMediaIndex est initialisé à un index valide
+    // Initialisation de l'indice du média actuel si nécessaire.
     if (currentMediaIndex === undefined) {
         currentMediaIndex = 0;
     }
 
+    // Mise à jour de l'indice pour le nouveau média.
     currentMediaIndex += step;
 
     // Gérer le débordement de l'index
     if (currentMediaIndex >= mediaManager.photographerMedia.length) {
-        currentMediaIndex = 0;
+        currentMediaIndex = 0; // Retour au début si dépassement de la fin.
     } else if (currentMediaIndex < 0) {
-        currentMediaIndex = mediaManager.photographerMedia.length - 1;
+        currentMediaIndex = mediaManager.photographerMedia.length - 1; // Aller à la fin si en dessous de zéro.
     }
 
 
-
+    // Récupération du nouvel objet média et ouverture dans la lightbox.
     const newMediaId = mediaManager.photographerMedia[currentMediaIndex];
     openLightbox(newMediaId);
 }
 
-
+// Ferme la lightbox en modifiant son style d'affichage.
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
     if (lightbox.style.display === 'block') {
-        lightbox.style.display = 'none';
+        lightbox.style.display = 'none'; // Cache la lightbox.
     }
 }
 

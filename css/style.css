@@ -92,7 +92,7 @@ article p {
 
 .media-container img,
 .media-container video {
-  width: 300px;
+  width: 350px;
   height: 300px;
   object-fit: cover;
 }
