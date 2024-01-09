@@ -57,9 +57,6 @@ headerLink.addEventListener('click', (e) => {
     // Prévenir le comportement par défaut si vous voulez d'abord logger avant de rediriger
     e.preventDefault(); 
 
-    console.log(`Photographe ID: ${id}`);
-    // Logique pour récupérer les données du photographe si nécessaire
-
     // Puis rediriger vers la page de détails du photographe
     window.location.href = headerLink.href;
 });

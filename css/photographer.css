@@ -1,11 +1,15 @@
 #contact_modal {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
 }
+
 
 .photograph-header {
   background-color: #fafafa;
@@ -75,6 +79,7 @@ h1 {
   justify-content: space-between;
   padding: 35px;
   margin: auto;
+  
 }
 
 .modal header {
@@ -195,12 +200,26 @@ form input {
 
 .media-item {
   position: relative;
-  /* autres styles pour l'élément média */
 }
 
 .like-button {
-  display: block; /* Cela place le bouton sur sa propre ligne en dessous de l'élément média */
-  /* autres styles pour le bouton */
+  display: block;
+}
+
+#closeModalButton {
+  border: none;
+  background: none;
+  outline: none; 
+}
+
+.reverse_heart_count {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1rem;
+}
+
+.fa-heart {
+  padding-top: 1px;
 }
 
 /* BOUTON DE TRIE */
@@ -223,6 +242,7 @@ form input {
   background-color: #901c1c;
   color: #ffffff;
 }
+
 
 @supports (pointer-events: none) and
   ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
@@ -287,17 +307,4 @@ form input {
   .custom-dropdown--white::after {
     color: rgba(255, 255, 255, 0.9);
   }
-
-  /* // FF only temp fix
-  @-moz-document url-prefix() {
-    .custom-dropdown__select {
-      padding-right: 0.9em;
-    }
-    .custom-dropdown--large .custom-dropdown__select {
-      padding-right: 1.3em;
-    }
-    .custom-dropdown--small .custom-dropdown__select {
-      padding-right: 0.5em;
-    }
-  } */
 }

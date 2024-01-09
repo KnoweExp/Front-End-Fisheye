@@ -5,7 +5,6 @@ import { closeModal, displayModal } from '../utils/contactForm.js';
 // Initialisation de variables pour stocker le nom du photographe courant et l'indice du média courant
 let currentPhotographerName = '';
 let currentMediaIndex = 0;
-let openLightboxCallCount = 0;
 
 // Définition de la classe MediaManager pour gérer les médias des photographes
 class MediaManager {
@@ -192,8 +191,6 @@ function createLightboxElements() {
 
 // Ouvre la lightbox et affiche le contenu média sélectionné.
 function openLightbox(media) {
-    openLightboxCallCount++;
-    console.log("openLightbox a été appelé", openLightboxCallCount, "fois");
 
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.querySelector('.lightbox-content');
@@ -277,10 +274,6 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-window.onload = () => {
-    setTimeout(setupLightbox, 1000); // Retarder pour tester
-};
-
 function displayPhotographerDetails(photographerData) {
 
     let totalLikes = 0;
@@ -329,7 +322,10 @@ function displayPhotographerDetails(photographerData) {
 
     // Ajout du nom de photographe a la modale contactez-moi
     const titreModal = document.getElementById('modalTitle');
-    titreModal.textContent = "Contactez-moi " + photographerData.name;
+    const breakLine = document.createElement('br');
+    titreModal.textContent = "Contactez-moi ";
+    titreModal.appendChild(breakLine);
+    titreModal.appendChild(document.createTextNode(photographerData.name));
 
     // Créer et ajouter l'image
     const img = document.createElement('img');
@@ -368,7 +364,6 @@ function displayPhotographerMedia() {
     mediaManager.photographerMedia.forEach(mediaItem => {
 
         mediaItem.isLiked = false;
-        /* const mediaObject = MediaFactory(mediaItem, photographerFullName, photographerMedia); */
 
         const mediaElement = mediaItem.getHTML();
         mediaContainer.appendChild(mediaElement);
@@ -379,7 +374,6 @@ function displayPhotographerMedia() {
 }
 
 export function toggleLike(id, likesCountElement) {
-    console.log("toggleLike called", id, likesCountElement, mediaManager.photographerMedia);
     const media = mediaManager.photographerMedia.find(m => m.id === id);
     if (media) {
         media.isLiked = !media.isLiked;
@@ -390,7 +384,6 @@ export function toggleLike(id, likesCountElement) {
         }
         likesCountElement.textContent = media.likes;
         updateLikeDisplay(id, media.isLiked);
-        console.log(media.isLiked)
         updateTotalLikes(mediaManager.photographerMedia);
     }
 }
@@ -426,14 +419,13 @@ function sortMedia(sortBy) {
             mediaManager.photographerMedia.sort((a, b) => b.likes - a.likes);
             break;
         case 'date':
-            // Assurez-vous que chaque objet média a une propriété 'date' valide
             mediaManager.photographerMedia.sort((b, a) => new Date(b.date) - new Date(a.date));
             break;
         case 'title':
             mediaManager.photographerMedia.sort((a, b) => a.title.localeCompare(b.title));
             break;
         default:
-            // Vous pourriez avoir un tri par défaut ici
+            mediaManager.photographerMedia.sort((a, b) => b.likes - a.likes);
             break;
     }
 }

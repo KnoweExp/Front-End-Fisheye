@@ -14,7 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeModalButton) {
         closeModalButton.addEventListener('click', closeModal);
     }
+
+    document.addEventListener('keydown', handleModaleKeypress);
 });
+
+function handleModaleKeypress(event) {
+    const modal=document.getElementById("contact_modal");
+    if (modal && modal.style.display === 'block' && event.key === 'Escape') {
+        closeModal();
+    }
+}
 
 
 export function closeModal() {

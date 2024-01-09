@@ -5,7 +5,6 @@ class ImageMedia {
     constructor(mediaData, currentPhotographerName, photographerMedia) {
 
         this.src = buildMediaPath(currentPhotographerName, mediaData);
-        console.log("mediadata dans mediafactory : ", mediaData)
         this.title = mediaData.title;
         this.id = mediaData.id;
         this.likes = mediaData.likes;
@@ -36,12 +35,13 @@ class ImageMedia {
         likesCount.textContent = this.likes;
         likesCount.className = "likes-count";
         likesCount.tabIndex = 0;
-        mediaDetail.appendChild(likesCount);
 
         const likeButton = document.createElement('div');
         likeButton.id = `like-button-${this.id}`;
+        likeButton.className = `reverse_heart_count`;
         likeButton.innerHTML = '<i class="far fa-heart"></i>';
         likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, this.photographerMedia));
+        likeButton.appendChild(likesCount);
         mediaDetail.appendChild(likeButton);
 
         article.appendChild(mediaDetail);
@@ -96,12 +96,14 @@ class VideoMedia {
         likesCount.textContent = this.likes;
         likesCount.tabIndex = 0;
         likesCount.className = "likes-count";
-        mediaDetail.appendChild(likesCount);
+        
 
         const likeButton = document.createElement('div');
         likeButton.id = `like-button-${this.id}`;
+        likeButton.className = `reverse_heart_count`;
         likeButton.innerHTML = '<i class="far fa-heart"></i>';
         likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, this.photographerMedia));
+        likeButton.appendChild(likesCount);
         mediaDetail.appendChild(likeButton);
 
         article.appendChild(mediaDetail);
@@ -121,7 +123,6 @@ class VideoMedia {
 }
 
 function MediaFactory(mediaData, photographerName, photographerMedia) {
-    console.log("Dans MediaFactory - PhotographerName :", photographerName);
 
     if (mediaData.image) {
         return new ImageMedia(mediaData, photographerName, photographerMedia);

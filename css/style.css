@@ -29,14 +29,6 @@ a {
   margin-top: 100px;
 }
 
-/* .photographer_section article {
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-} */
-
 .photographer-section__profile-name {
   font-size: 3em;
 }
@@ -72,19 +64,6 @@ a {
   flex-direction: column;
 }
 
-/* button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
-} */
-
 article p {
   margin-top: 0;
   margin-bottom: 0.4em;
@@ -96,8 +75,6 @@ article p {
   height: 300px;
   object-fit: cover;
 }
-
-/* A VOIR  */
 
 textarea {
   width: 100%;
@@ -125,17 +102,10 @@ textarea {
   width: 200px;
 }
 
-/* .photographer-header img {
-    object-fit: cover;
-    border-radius: 100px;
-    height: 200px;
-    width: 200px;
-} */
-
 .encartPhotographe {
   position: fixed;
   bottom: 0px;
-  left: 85%;
+  left: 75vw;
   background-color: #d3573c;
   width: 225px;
   height: 50px;

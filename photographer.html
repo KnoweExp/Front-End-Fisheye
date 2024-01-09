@@ -8,13 +8,13 @@
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
-  <title>Fisheye - photographe </title>
+  <title>Fisheye - photographe</title>
 </head>
 
 <body>
   <header>
-    <a href="index.html">
-      <img src="assets/images/logo.png" alt="logo" class="logo" />
+    <a href="index.html" aria-label="Retour à la page d'accueil" title="Retour à la page d'accueil">
+      <img src="assets/images/logo.png" alt="logo du site Fisheye" class="logo" />
     </a>
   </header>
   <main id="main">
@@ -26,8 +26,8 @@
     </aside>
 
     <span class="sort custom-dropdown custom-dropdown--white">
-      <span tabindex="0">trier par</span>
-      <select tabindex="0" id="sortOptions" class="trie custom-dropdown__select custom-dropdown__select--white">
+      <label for="sortOptions" tabindex="0">Trier par</label>
+      <select id="sortOptions" class="trie custom-dropdown__select custom-dropdown__select--white" aria-label="Critères de tri">
         <option value="popularity">Par popularité</option>
         <option value="date">Par date</option>
         <option value="title">Par titre</option>
@@ -39,8 +39,10 @@
   <div id="contact_modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal">
       <header>
-        <h2 id="modalTitle" aria-labelledby="title">Contactez-moi</h2>
-        <img src="assets/icons/close.svg" id="closeModalButton" />
+        <h2 id="modalTitle" tabindex="0">Contactez-moi</h2>
+        <div tabindex="0">
+          <img src="assets/icons/close.svg" id="closeModalButton" alt="bouton de fermeture"/>
+        </div>
       </header>
       <form>
         <div class="formData">
@@ -56,24 +58,15 @@
           <input class="text-control" type="email" id="email" name="email" />
         </div>
         <div class="formData">
-          <label>Votre message</label>
+          <label for="message">Votre message</label>
           <textarea id="message" name="message"></textarea>
         </div>
         <button class="contact_button">Envoyer</button>
       </form>
     </div>
+    
   </div>
-  <!-- <div id="lightbox" tabindex="0" class="lightbox">
-    <a class="prev" tabindex="0">&#10094;</a>
-    <a class="next" tabindex="0">&#10095;</a>
-    <span class="close" tabindex="0">&times;</span>
-    <div class="lightbox-content">
-       Les médias (images/vidéos) seront insérés ici dynamiquement -->
-  <!-- </div>
-  </div> -->
-
-
-
+  
   <script type="module" src="scripts/utils/contactForm.js"></script>
   <script type="module" src="/scripts/pages/photographer.js"></script>
   <script type="module" src="/scripts/templates/mediaFactory.js"></script>
