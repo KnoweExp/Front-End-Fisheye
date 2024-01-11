@@ -110,6 +110,12 @@ class VideoMedia {
         likeButton.className = `reverse_heart_count`;
         likeButton.innerHTML = '<i class="far fa-heart"></i>';
         likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, this.photographerMedia));
+        likeButton.addEventListener('keydown', (event) => {
+            if (event.key === ' ') {
+                event.preventDefault();
+                toggleLike(this.id, likesCount, this.photographerMedia);
+            }
+        });
         likeButton.appendChild(likesCount);
         mediaDetail.appendChild(likeButton);
 
