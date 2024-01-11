@@ -149,6 +149,7 @@ form input {
 }
 
 .lightbox-title {
+  font-size: 24px;
   color: #901c1c;
   padding-left: 0.5em;
 }
@@ -220,6 +221,12 @@ form input {
 
 .fa-heart {
   padding-top: 1px;
+}
+
+.form-error {
+  color: red;
+  font-size: 1em;
+  margin-top: 5px;
 }
 
 /* BOUTON DE TRIE */

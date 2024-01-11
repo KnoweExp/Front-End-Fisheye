@@ -34,13 +34,20 @@ class ImageMedia {
         const likesCount = document.createElement('span');
         likesCount.textContent = this.likes;
         likesCount.className = "likes-count";
-        likesCount.tabIndex = 0;
+        
 
         const likeButton = document.createElement('div');
         likeButton.id = `like-button-${this.id}`;
+        likeButton.tabIndex = 0;
         likeButton.className = `reverse_heart_count`;
         likeButton.innerHTML = '<i class="far fa-heart"></i>';
         likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, this.photographerMedia));
+        likeButton.addEventListener('keydown', (event) => {
+            if (event.key === ' ') {
+                event.preventDefault();
+                toggleLike(this.id, likesCount, this.photographerMedia);
+            }
+        });
         likeButton.appendChild(likesCount);
         mediaDetail.appendChild(likeButton);
 
@@ -58,7 +65,7 @@ class VideoMedia {
     constructor(mediaData, currentPhotographerName, photographerMedia) {
         this.src = buildMediaPath(currentPhotographerName, mediaData);
         this.title = mediaData.title;
-        this.id = mediaData.id; // L'ID est pris du JSON
+        this.id = mediaData.id;
         this.likes = mediaData.likes;
         this.photographerMedia = photographerMedia;
         this.type = 'video';
@@ -78,10 +85,10 @@ class VideoMedia {
         videoElement.dataset.mediaId = this.id;
         article.appendChild(videoElement)
 
-        // Créer et ajouter l'élément <source>
+        
         const sourceElement = document.createElement('source');
         sourceElement.src = this.src;
-        sourceElement.type = 'video/mp4'; // Assurez-vous que le type correspond au format de votre vidéo
+        sourceElement.type = 'video/mp4';
         videoElement.appendChild(sourceElement);
 
         const mediaDetail = document.createElement('div');
@@ -94,12 +101,12 @@ class VideoMedia {
 
         const likesCount = document.createElement('span');
         likesCount.textContent = this.likes;
-        likesCount.tabIndex = 0;
         likesCount.className = "likes-count";
         
 
         const likeButton = document.createElement('div');
         likeButton.id = `like-button-${this.id}`;
+        likeButton.tabIndex = 0;
         likeButton.className = `reverse_heart_count`;
         likeButton.innerHTML = '<i class="far fa-heart"></i>';
         likeButton.addEventListener('click', () => toggleLike(this.id, likesCount, this.photographerMedia));

@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/style.css" rel="stylesheet" type="text/css">
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 <body>
   <header>
     <a href="index.html" aria-label="Retour à la page d'accueil" title="Retour à la page d'accueil">
-      <img src="assets/images/logo.png" alt="logo du site Fisheye" class="logo" />
+      <img src="assets/images/logo.png" alt="logo du site Fisheye" class="logo">
     </a>
   </header>
   <main id="main">
@@ -25,37 +25,37 @@
       <h3 class="number-like">Nombres de like</h3>
     </aside>
 
-    <span class="sort custom-dropdown custom-dropdown--white">
-      <label for="sortOptions" tabindex="0">Trier par</label>
+    <div class="sort custom-dropdown custom-dropdown--white" role="group" aria-labelledby="sortLabel">
+      <label id="sortLabel" for="sortOptions" tabindex="0">Trier par</label>
       <select id="sortOptions" class="trie custom-dropdown__select custom-dropdown__select--white" aria-label="Critères de tri">
         <option value="popularity">Par popularité</option>
         <option value="date">Par date</option>
         <option value="title">Par titre</option>
       </select>
-    </span>
+    </div>
 
     <section class="gallery-section"></section>
   </main>
-  <div id="contact_modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+  <div id="contact_modal" aria-labelledby="modalTitle" role="dialog" aria-hidden="true">
     <div class="modal">
       <header>
         <h2 id="modalTitle" tabindex="0">Contactez-moi</h2>
         <div tabindex="0">
-          <img src="assets/icons/close.svg" id="closeModalButton" alt="bouton de fermeture"/>
+          <img src="assets/icons/close.svg" id="closeModalButton" alt="bouton de fermeture">
         </div>
       </header>
       <form>
         <div class="formData">
           <label for="first">Prénom</label>
-          <input class="text-control" type="text" id="first" name="first" />
+          <input class="text-control" type="text" id="first" name="first">
         </div>
         <div class="formData">
           <label for="last">Nom</label>
-          <input class="text-control" type="text" id="last" name="last" />
+          <input class="text-control" type="text" id="last" name="last">
         </div>
         <div class="formData">
           <label for="email">E-mail</label>
-          <input class="text-control" type="email" id="email" name="email" />
+          <input class="text-control" type="email" id="email" name="email">
         </div>
         <div class="formData">
           <label for="message">Votre message</label>
